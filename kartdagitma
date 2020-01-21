@@ -1,0 +1,53 @@
+import random #rastgele secim icin random import edildi
+simgeler=['Karo','Maça','Sinek','Kupa'] #4 simgemiz var
+sayilar=[*range(2,11)] #2ile10(dahil) rakamlarımız
+o1=[] #oyuncu degisken
+o2=[]
+o3=[]
+o4=[]
+kartlar=[] #tüm kartları barındıracak degisken
+
+for x in simgeler: #her bir simge icin dön
+    kartlar.append(x+' '+'As') ##her bir simge icin as papaz bacak ve kızdan birer 
+    kartlar.append(x+' '+'Papaz') #tane olacaklarından her bir simge 
+    kartlar.append(x+' '+'Vale') #icerisinde don ve kartlar degiskenine
+    kartlar.append(x+' '+'Kız') #ekle
+    for k in range(2,11): #2ile10(dahil) herbirinde
+            kartlar.append(x+' '+str(k)) #kartlar a simge+rakamı ekle
+            
+for z in range(1,5): #4defa
+    if(z==1): #eger 1ise 
+            oyuncum=o1 #islem yapılacak oyuncum o1 degiskenimdir
+    elif(z==2):
+            oyuncum=o2
+    elif(z==3):
+            oyuncum=o3
+    else:
+            oyuncum=o4
+    for n in range(1,14):#13defa
+        rsecim=random.choice(kartlar)#rsecim kartlar dizisinden rastgele secilmis veri
+        oyuncum.append(rsecim) #oyuncum aslında o1(1ile5 arası 1.dongu icin). yani o1e rsecim i ekle
+        kartlar.pop(kartlar.index(rsecim)) #kartlar dizisinden rastgele secilmis veriyi kaldır
+#html dosyası
+Table = "<html><table border='2'><tr><th>oyuncu 1 : </th>";
+for j in o1: #o1 deki kart adedi kadar(13) dön
+    satir = "<td>"+j+"</td>"; #j(döngü degerine karsılık gelen veriyi) satir a ekle
+    Table = Table + satir;#her satiri degiskene(Table) ekliyoruz.
+Table+="</tr><tr><th>oyuncu 2: </th>"
+for k in o2:
+    satir = "<td>"+k+"</td>";
+    Table = Table + satir;
+Table+="</tr><tr><th>oyuncu 3: </th>"
+for l in o3:
+    satir = "<td>"+l+"</td>";
+    Table = Table + satir;
+Table+="</tr><tr><th>oyuncu 4: </th>"
+for m in o4:
+    satir = "<td>"+m+"</td>";
+    Table = Table + satir;
+
+Table = Table+"</tr></table></html>"; #satirlar eklendikten sonra tr table ve html etiketlerini kapatiyoruz.
+#HTML dosyamizin icerigi hazir olmus oluyor.
+hs = open("kartTable.html", 'w'); #kartTable adinda html dosyasi olusturur ve yazma modunda acar
+hs.write(Table); #html dosyasinin icerigini yaz.
+hs.close(); #dosyayi kapat.
